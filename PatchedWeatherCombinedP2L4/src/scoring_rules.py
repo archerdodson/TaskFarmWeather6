@@ -444,7 +444,7 @@ class SignatureEnergyPatchCombined(ScoringRule):
             )
 
             mean_score = energy_scores.mean()  # (scalar tensor)
-            vals.append(mean_score*self.weights[lat])
+            vals.append(mean_score)
 
         # Convert vals to tensor: (32,)
         energy_scores_lat = torch.stack(vals, dim=0).sum()
