@@ -39,7 +39,7 @@ weatherbench_small = False
 #name_postfix = '_mytrainedmodelEnergyScore' ##Change this
 name_postfix = '_mytrainedmodelSignatureKernel' ##Change this
 training_ensemble_size = 3  #3/10
-prediction_ensemble_size = 5 ##3/10
+prediction_ensemble_size = 3 ##3/10
 prediction_length = 2  
 
 weights = np.array([0.07704437, 0.23039114, 0.38151911, 0.52897285, 0.67133229,
@@ -126,7 +126,7 @@ print(string)
 print("Load weatherbench dataset...")
 dataset_train, dataset_val, dataset_test = load_weatherbench_data(weatherbench_data_folder, cuda, load_all_data_GPU,
                                                             return_test=True,
-                                                            weatherbench_small=weatherbench_small)
+                                                            weatherbench_small=weatherbench_small, predictionlength=prediction_length)
 print("Loaded")
 print("Validation set size:", len(dataset_val))
 print("Test set size:", len(dataset_test))
@@ -359,6 +359,7 @@ da_predictions = []
 for i in range(prediction.shape[1]):
     da_predictions.append(convert_tensor_to_da(prediction[0, i], realization))
 
+print("yo?")
 if save_plots:
     global_projection = False
     # we do plots with 5 predictions if not deterministic
@@ -367,8 +368,8 @@ if save_plots:
         kwargs_subplots = dict(ncols=2, nrows=1, figsize=(16 * 2.0 / 3, 2.5),
                                 subplot_kw=dict(projection=ccrs.PlateCarree(), facecolor="gray"))
     else:
-        n_predictions_for_plots = 5
-        kwargs_subplots = dict(ncols=3, nrows=2, figsize=(16, 4.5),
+        n_predictions_for_plots = 3
+        kwargs_subplots = dict(ncols=2, nrows=2, figsize=(16, 4.5),
                                 subplot_kw=dict(projection=ccrs.PlateCarree(), facecolor="gray"))
 
     # --- plot the absolute values ---

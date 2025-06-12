@@ -39,7 +39,7 @@ weatherbench_small = False
 #name_postfix = '_mytrainedmodelEnergyScore' ##Change this
 name_postfix = '_mytrainedmodelSignatureKernel' ##Change this
 training_ensemble_size = 3  #3/10
-prediction_ensemble_size = 5 ##3/10
+prediction_ensemble_size = 3 ##3/10
 prediction_length = 2  
 
 weights = np.array([0.07704437, 0.23039114, 0.38151911, 0.52897285, 0.67133229,
@@ -367,8 +367,8 @@ if save_plots:
         kwargs_subplots = dict(ncols=2, nrows=1, figsize=(16 * 2.0 / 3, 2.5),
                                 subplot_kw=dict(projection=ccrs.PlateCarree(), facecolor="gray"))
     else:
-        n_predictions_for_plots = 5
-        kwargs_subplots = dict(ncols=3, nrows=2, figsize=(16, 4.5),
+        n_predictions_for_plots = 3
+        kwargs_subplots = dict(ncols=2, nrows=2, figsize=(16, 4.5),
                                 subplot_kw=dict(projection=ccrs.PlateCarree(), facecolor="gray"))
 
     # --- plot the absolute values ---
