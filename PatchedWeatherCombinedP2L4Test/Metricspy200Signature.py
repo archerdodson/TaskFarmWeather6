@@ -280,7 +280,7 @@ with torch.no_grad():
 
             forecasts = []
 
-            net.resetseed()
+            #net.resetseed()
 
             for step in range(prediction_length):
                 onesteps = []
