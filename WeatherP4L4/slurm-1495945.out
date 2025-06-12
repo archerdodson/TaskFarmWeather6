@@ -1,0 +1,55 @@
+Loading data into RAM
+CPU memory used (MB) 17
+Loading data into GPU
+GPU memory used (MB) 17
+Loading data into RAM
+CPU memory used (MB) 5
+Loading data into GPU
+GPU memory used (MB) 5
+Training set size: 2178
+Validation set size: 718
+Train SR network for WeatherBench model with lr 0.0001 using SignatureKernel scoring rule
+reached train
+  0%|          | 0/150 [00:00<?, ?it/s]/gpfs/home/stats/stubxk/ArcherDissEnv3/lib/python3.11/site-packages/numba/cuda/dispatcher.py:536: NumbaPerformanceWarning: [1mGrid size 9 will likely result in GPU under-utilization due to low occupancy.[0m
+  warn(NumbaPerformanceWarning(msg))
+/gpfs/home/stats/stubxk/ArcherDissEnv3/lib/python3.11/site-packages/numba/cuda/dispatcher.py:536: NumbaPerformanceWarning: [1mGrid size 3 will likely result in GPU under-utilization due to low occupancy.[0m
+  warn(NumbaPerformanceWarning(msg))
+  0%|          | 0/150 [00:08<?, ?it/s]
+Traceback (most recent call last):
+  File "/gpfs/home/stats/stubxk/TaskFarmWeather6/WeatherP4L4/TestWeatherBench.py", line 204, in <module>
+    train_loss_list, val_loss_list = fit(data_loader_train, net, loss_fn, optimizer, scheduler, epochs, cuda,
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/home/stats/stubxk/TaskFarmWeather6/WeatherP4L4/src/nn.py", line 847, in fit
+    train_loss =  train_epoch_longerpredictionbatch(train_loader, model, loss_fn, optimizer, cuda, prediction_length,scaling_mean,scaling_std)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/home/stats/stubxk/TaskFarmWeather6/WeatherP4L4/src/nn.py", line 1613, in train_epoch_longerpredictionbatch
+    loss = loss_fn(forecasts, targetbatch,scaling_mean, scaling_std)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/home/stats/stubxk/TaskFarmWeather6/WeatherP4L4/src/scoring_rules.py", line 202, in estimate_score_batch
+    score = signature_kernel.compute_scoring_rule(X,y)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/home/stats/stubxk/ArcherDissEnv3/lib/python3.11/site-packages/sigkernel/sigkernel.py", line 156, in compute_scoring_rule
+    K_Xy = self.compute_Gram(X, y, sym=False, max_batch=max_batch)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/home/stats/stubxk/ArcherDissEnv3/lib/python3.11/site-packages/sigkernel/sigkernel.py", line 102, in compute_Gram
+    K = _SigKernelGram.apply(X, Y, self.static_kernel, self.dyadic_order, sym, self._naive_solver)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scrtp/avon/eb/software/PyTorch/2.1.2-foss-2023a-CUDA-12.1.1/lib/python3.11/site-packages/torch/autograd/function.py", line 539, in apply
+    return super().apply(*args, **kwargs)  # type: ignore[misc]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/home/stats/stubxk/ArcherDissEnv3/lib/python3.11/site-packages/sigkernel/sigkernel.py", line 382, in forward
+    grad_points = prep_backward(X, Y, G, G_static, sym, static_kernel, dyadic_order, _naive_solver)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/home/stats/stubxk/ArcherDissEnv3/lib/python3.11/site-packages/sigkernel/sigkernel.py", line 406, in prep_backward
+    G_static_ = tile(tile(G_static_, 2, 2**dyadic_order)/float(2**dyadic_order), 3, 2**dyadic_order)/float(2**dyadic_order)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/home/stats/stubxk/ArcherDissEnv3/lib/python3.11/site-packages/sigkernel/sigkernel.py", line 579, in tile
+    order_index = torch.LongTensor(np.concatenate([init_dim * np.arange(n_tile) + i for i in range(init_dim)])).to(a.device)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1.
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+srun: error: gpu001: task 0: Exited with exit code 1
+srun: launch/slurm: _step_signal: Terminating StepId=1495945.0
